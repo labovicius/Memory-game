@@ -1,15 +1,25 @@
 .content {
   display: flex;
+  flex-direction: row;
   justify-content: space-around;
   margin: 1cm;
 }
 
 .setup {
   background-color: #f98a00;
-  width: 40%;
   height: 620px;
+  flex: 40%;
   box-shadow: 20px 25px 15px #272324;
   border-radius: 0 25% 0 25%;
+}
+.game {
+  flex: 60%;
+}
+
+@media (max-width: 1200px) {
+  .content {
+    flex-direction: column;
+  }
 }
 
 .info {
@@ -61,8 +71,4 @@ button {
 button:hover {
   background-color: indigo;
   color: white;
-}
-
-div > h1 {
-  margin: 1cm 3.7cm;
 }
