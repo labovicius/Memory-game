@@ -2,6 +2,12 @@ const startButton = document.getElementsByClassName("startGame")[0];
 const cardHolder = document.getElementsByClassName("card-holder");
 
 (function () {
+  let score = {
+    min: 0,
+    sec: 0,
+  };
+  localStorage.setItem("best_score", JSON.stringify(score));
+
   for (let i = 0; i < 4; i++) {
     let div = document.createElement("div");
     div.classList.add(`row${i + 1}`);

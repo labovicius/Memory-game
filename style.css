@@ -28,11 +28,12 @@
 }
 
 .timer,
-.score {
+.score,
+.result {
   font-weight: 100;
   font-size: 3em;
   visibility: hidden;
-  padding: 2cm 0cm;
+  padding: 1cm 0cm;
 }
 
 .row1,

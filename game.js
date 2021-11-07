@@ -17,13 +17,16 @@ let configuration = {
   ],
 };
 
+let best_score = JSON.parse(localStorage.getItem("best_score"));
+
 let guessedIndex = [];
 let cards = [];
 let deleteNodes = [];
 let combination = [];
 
-const timerElement = document.getElementsByClassName(`timer`);
-const scoreElement = document.getElementsByClassName(`score`);
+const resultElement = document.getElementsByClassName("result");
+const timerElement = document.getElementsByClassName("timer");
+const scoreElement = document.getElementsByClassName("score");
 
 let stopwatch;
 
@@ -50,8 +53,11 @@ startTimer = () => {
 startGame = () => {
   configuration.gameStarted = true;
 
+  resultElement[0].innerHTML = "";
   clearInterval(stopwatch);
   startTimer();
+
+  document.getElementById("button").innerHTML = "RESTART GAME";
 
   guessedIndex = [];
 
@@ -178,6 +184,32 @@ checkCardBox = (elem, ind, row) => {
     }
 
     if (configuration.remaining === 0) {
+      best_score.min = best_score.min > 0 ? best_score.min : configuration.min;
+      best_score.sec = best_score.sec > 0 ? best_score.sec : configuration.sec;
+
+      if (best_score.min > configuration.min) {
+        best_score.min = configuration.min;
+        best_score.sec = configuration.sec;
+      } else if (best_score.min === configuration.min) {
+        if (best_score.sec > configuration.sec) {
+          best_score.sec = configuration.sec;
+        }
+      }
+
+      resultElement[0].innerHTML =
+        "Your time is " +
+        configuration.min +
+        " min " +
+        configuration.sec +
+        " sec! Your best time is " +
+        best_score.min +
+        " min " +
+        best_score.sec +
+        " sec!";
+
+      resultElement[0].style.visibility = "visible";
+
+      localStorage.setItem("best_score", JSON.stringify(best_score));
       clearInterval(stopwatch);
     }
   }
